@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marathon/models/user.dart';
-import 'package:marathon/screens/splash.dart';
+import 'package:marathon/screens/wrapper.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:provider/provider.dart';
 
