@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "389903499981",
+    "firebase_url": "https://marathon-4b3a4.firebaseio.com",
+    "project_id": "marathon-4b3a4",
+    "storage_bucket": "marathon-4b3a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389903499981:android:0d75d439f255d7f57f1f84",
+        "android_client_info": {
+          "package_name": "com.netcon.marathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389903499981-mtoj74nopua06ddqiejvnj8dsadbsva9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.netcon.marathon",
+            "certificate_hash": "6f0a4272546812e63801fc5d09cb7b008d2deb14"
+          }
+        },
+        {
+          "client_id": "389903499981-4jsm7cj3afm5djf94u0qjple1tq33i50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2dDc2UIrx6Vb7xtYKRUJW6tBFCrRRHx8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389903499981-4jsm7cj3afm5djf94u0qjple1tq33i50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
