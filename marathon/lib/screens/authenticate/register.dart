@@ -142,6 +142,7 @@ class _RegisterState extends State<Register> {
                               'time_added': DateTime.now(),
                               'email': _email,
                             });
+                            Navigator.pop(context);
                           }
                         }
                       },
