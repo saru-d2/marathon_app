@@ -55,6 +55,7 @@ class _AuthenticateState extends State<Authenticate> {
               Text('or'),
               SignInButton(Buttons.Email, onPressed: () {
                 print("email");
+//                Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return new SignIn();
                 }));
@@ -63,8 +64,9 @@ class _AuthenticateState extends State<Authenticate> {
                 child: Text('Not a member? Sign up!'),
                 onPressed: () {
                   print("register");
+//                  Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return new Register();
+                    return new Register();
                 }));
                 },
               )

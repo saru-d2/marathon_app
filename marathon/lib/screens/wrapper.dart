@@ -14,6 +14,8 @@ class Wrapper extends StatelessWidget {
       return Authenticate();
     }
     else{
+      print('what');
+      Navigator.pop(context);
       return Home();
     }
   }

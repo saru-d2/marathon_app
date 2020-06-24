@@ -7,6 +7,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('okay');
     return Scaffold(
       backgroundColor: Colors.brown[50],
       appBar: AppBar(
