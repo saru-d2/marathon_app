@@ -77,6 +77,9 @@ class _RegisterState extends State<Register> {
                         loading = false;
                       });
                     }
+                    else{
+                      Navigator.pop(context);
+                    }
                   }
                 },
               ),

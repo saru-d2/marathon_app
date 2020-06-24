@@ -15,10 +15,10 @@ class Wrapper extends StatelessWidget {
     }
     else{
       print('what');
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return new Home();
-      }));
-      //      return Home();
+//      Navigator.push(context, MaterialPageRoute(builder: (context) {
+//        return new Home();
+//      }));
+      return Home();
     }
   }
 }

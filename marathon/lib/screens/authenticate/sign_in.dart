@@ -76,6 +76,9 @@ class _SignInState extends State<SignIn> {
                         loading = false;
                       });
                     }
+                    else{
+                      Navigator.pop(context);
+                    }
                   }
                 },
               ),
