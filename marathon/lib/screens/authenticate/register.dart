@@ -80,8 +80,8 @@ class _RegisterState extends State<Register> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(hintText: 'Confirm Password'),
-                      validator: (val) => val.length < 6
-                          ? 'enter a password atleast 6 characters long'
+                      validator: (val) => _conPassword != _password
+                          ? 'Passwords do not match'
                           : null,
                       obscureText: true,
                       onChanged: (val) {
@@ -108,10 +108,20 @@ class _RegisterState extends State<Register> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(hintText: 'age'),
-                      validator: (val) => val.length < 1
-                          ? 'enter your age'
-                          : null,
-                      obscureText: true,
+                      validator: (val)  {
+                        try{
+                          int okay =int.parse(val);
+                          if(okay<18){
+                            return 'you must atleast be 18';
+                          }
+                          if(okay>200){
+                            return 'We know you are not that old';
+                          }
+                          return null;
+                        }catch(e){
+                          return 'enter a valid age';
+                        }
+                      },
                       onChanged: (val) {
                         setState(() => _age = val);
                       },
@@ -126,7 +136,7 @@ class _RegisterState extends State<Register> {
                         if (_formKey.currentState.validate()) {
                           setState(() => loading = true);
                           dynamic result = await _auth
-                              .registerWithEmailAndPassword(_email, _password);
+                              .registerWithEmailAndPassword(_email, _password,_age,_name);
                           if (result == null) {
                             setState(() {
                               error = 'please supply a valid email';
@@ -135,13 +145,6 @@ class _RegisterState extends State<Register> {
                             
                           }
                           else {
-                            Firestore.instance.collection('users').document().setData({
-                              'name': _name,
-                              'age': _age,
-                              'uid': result.uid,
-                              'time_added': DateTime.now(),
-                              'email': _email,
-                            });
                             Navigator.pop(context);
                           }
                         }
