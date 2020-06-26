@@ -2,8 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:marathon/services/auth.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
+  @override
+  var pic;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +42,21 @@ class Home extends StatelessWidget {
                     .collection("users")
                     .document(user.uid)
                     .get();
-                var name = a.data["displayname"];
-                print(name);
+                var name = a.data["photoUrl"];
+                print(a.data["displayname"]);
+                setState(() {
+                  pic = name;
+                });
               },
+            ),
+            Container(
+              child: pic == null
+                  ? Text("no pic")
+                  : Image.network(
+                      pic,
+                      height: 120,
+                      width: 120,
+                    ),
             )
           ],
         ),
