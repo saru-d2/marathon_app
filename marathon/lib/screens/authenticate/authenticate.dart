@@ -51,6 +51,7 @@ class _AuthenticateState extends State<Authenticate> {
                     onPressed: () async {
                       print("google");
                       dynamic result = await _auth.signInWithGoogle();
+                      if (result == null) print("sign in failed lol");
                     },
                   ),
                   SignInButton(

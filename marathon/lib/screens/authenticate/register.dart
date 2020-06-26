@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,7 +26,7 @@ class _RegisterState extends State<Register> {
   bool loading = false;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
-  dynamic _profilePic;
+  dynamic _profilePic = null;
 
   void getPic() async {
     var img = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -33,6 +34,22 @@ class _RegisterState extends State<Register> {
       _profilePic = img;
       print("hehe");
     });
+  }
+
+  void uploadPic(uid) async {
+    if (_profilePic == null) {
+      print("no photo");
+    } else {
+      final StorageReference ref =
+          FirebaseStorage.instance.ref().child('/assets/profilepics/$uid.png');
+      final StorageUploadTask task = ref.putFile(_profilePic);
+      // print('$uid.png');
+      // Future picurl = (await ref.getDownloadURL());
+      String downloadUrl = await (await task.onComplete).ref.getDownloadURL();
+      Firestore.instance.collection("users").document(uid).setData({
+        'photoUrl': downloadUrl.toString(),
+      }, merge: true);
+    }
   }
 
   @override
@@ -66,7 +83,8 @@ class _RegisterState extends State<Register> {
                         getPic();
                       },
                       elevation: 2.0,
-                      fillColor: Colors.white,
+
+                      // fillColor: Colors.white,
                       child: Icon(
                         Icons.person_outline,
                         size: 35.0,
@@ -171,15 +189,17 @@ class _RegisterState extends State<Register> {
                             });
                           } else {
                             Navigator.pop(context);
+                            uploadPic(result.uid);
                           }
                         }
                       },
                     ),
-                    // RaisedButton(
-                    //   onPressed: () {
-                    //     print(gender);
-                    //   },
-                    // ),
+                    RaisedButton(
+                      onPressed: () {
+                        // print(gender);
+                        // uploadPic();
+                      },
+                    ),
                     SizedBox(
                       height: 20,
                     ),

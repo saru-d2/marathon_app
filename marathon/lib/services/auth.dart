@@ -1,7 +1,5 @@
-// import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:marathon/models/user.dart';
 
@@ -54,11 +52,11 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      _db.collection('users').document().setData({
-        'name': name,
+      _db.collection('users').document(user.uid).setData({
+        'displayname': name,
         'age': age,
         'uid': user.uid,
-        'time_added': DateTime.now(),
+        'lastseen': DateTime.now(),
         'email': email,
       });
       return _userFromFirebaseUser(user);
@@ -117,5 +115,15 @@ class AuthService {
       'displayName': user.displayName,
       'lastSeen': DateTime.now(),
     });
+  }
+
+  Future getUser() async {
+    try {
+      final user = await _auth.currentUser();
+      return user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 }
