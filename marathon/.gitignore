@@ -1,5 +1,6 @@
 # pubspec
-marathon/pubspec.lock
+./marathon/pubspec.lock
+./.idea
 
 # Miscellaneous
 *.class

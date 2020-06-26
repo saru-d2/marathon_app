@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/constants.dart';
 import 'package:marathon/shared/loading.dart';
@@ -24,6 +25,15 @@ class _RegisterState extends State<Register> {
   bool loading = false;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  dynamic _profilePic;
+
+  void getPic() async {
+    var img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _profilePic = img;
+      print("hehe");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +55,26 @@ class _RegisterState extends State<Register> {
               ],
             ),
             body: Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
-                      height: 20,
+                    RawMaterialButton(
+                      onPressed: () {
+                        print("profile button");
+                        getPic();
+                      },
+                      elevation: 2.0,
+                      fillColor: Colors.white,
+                      child: Icon(
+                        Icons.person_outline,
+                        size: 35.0,
+                      ),
+                      padding: EdgeInsets.all(15.0),
+                      shape: CircleBorder(),
                     ),
+
                     TextFormField(
                       decoration: InputDecoration(hintText: 'Name'),
                       validator: (val) => val.isEmpty ? 'enter name' : null,
@@ -91,34 +113,38 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 20,
                     ),
-                    DropdownButton <String>(
-                      value: _gender,
-                      // validator: (val) => val != 'select gender' ? 'select gender' : null,
-                      onChanged: (String newVal) {
-                        setState(() {
-                          _gender = newVal;
-                        });
-                      },
-                      items: <String>['select gender', 'male', 'female', 'other'].map<DropdownMenuItem<String>> ((String val){
-                        return DropdownMenuItem<String>(
-                          value: val,
-                          child: Text(val),
+                    DropdownButton<String>(
+                        value: _gender,
+                        // validator: (val) => val != 'select gender' ? 'select gender' : null,
+                        onChanged: (String newVal) {
+                          setState(() {
+                            _gender = newVal;
+                          });
+                        },
+                        items: <String>[
+                          'select gender',
+                          'male',
+                          'female',
+                          'other'
+                        ].map<DropdownMenuItem<String>>((String val) {
+                          return DropdownMenuItem<String>(
+                            value: val,
+                            child: Text(val),
                           );
-                      }).toList()
-                    ),
+                        }).toList()),
                     TextFormField(
                       decoration: InputDecoration(hintText: 'age'),
-                      validator: (val)  {
-                        try{
-                          int okay =int.parse(val);
-                          if(okay<18){
+                      validator: (val) {
+                        try {
+                          int okay = int.parse(val);
+                          if (okay < 18) {
                             return 'you must atleast be 18';
                           }
-                          if(okay>200){
+                          if (okay > 200) {
                             return 'We know you are not that old';
                           }
                           return null;
-                        }catch(e){
+                        } catch (e) {
                           return 'enter a valid age';
                         }
                       },
@@ -135,16 +161,15 @@ class _RegisterState extends State<Register> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           setState(() => loading = true);
-                          dynamic result = await _auth
-                              .registerWithEmailAndPassword(_email, _password,_age,_name);
+                          dynamic result =
+                              await _auth.registerWithEmailAndPassword(
+                                  _email, _password, _age, _name);
                           if (result == null) {
                             setState(() {
                               error = 'please supply a valid email';
                               loading = false;
                             });
-                            
-                          }
-                          else {
+                          } else {
                             Navigator.pop(context);
                           }
                         }
