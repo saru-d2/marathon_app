@@ -45,10 +45,17 @@ class AuthService {
     }
   }
   //register with eamil and password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(String email, String password, String age, String name) async {
     try{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      _db.collection('users').document().setData({
+        'name': name,
+        'age': age,
+        'uid': user.uid,
+        'time_added': DateTime.now(),
+        'email': email,
+      });
       return _userFromFirebaseUser(user);
     }catch(e){
       print(e);
