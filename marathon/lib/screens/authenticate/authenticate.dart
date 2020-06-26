@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:marathon/screens/authenticate/register.dart';
 import 'package:marathon/screens/authenticate/sign_in.dart';
 import 'package:marathon/shared/constants.dart';
+import 'package:marathon/services/auth.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+  final AuthService _auth = AuthService();
   bool showSignIn = true;
   void toggleView() {
     setState(() => showSignIn = !showSignIn);
@@ -42,8 +44,9 @@ class _AuthenticateState extends State<Authenticate> {
               ),
               SignInButton(
                 Buttons.Google,
-                onPressed: () {
+                onPressed: () async {
                   print("google");
+                  dynamic result = await _auth.signInWithGoogle();
                 },
               ),
               SignInButton(
