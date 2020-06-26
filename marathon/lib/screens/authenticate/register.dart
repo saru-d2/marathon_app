@@ -126,7 +126,7 @@ class _RegisterState extends State<Register> {
                         if (_formKey.currentState.validate()) {
                           setState(() => loading = true);
                           dynamic result = await _auth
-                              .registerWithEmailAndPassword(_email, _password);
+                              .registerWithEmailAndPassword(_email, _password,_age,_name);
                           if (result == null) {
                             setState(() {
                               error = 'please supply a valid email';
@@ -135,13 +135,6 @@ class _RegisterState extends State<Register> {
                             
                           }
                           else {
-                            Firestore.instance.collection('users').document().setData({
-                              'name': _name,
-                              'age': _age,
-                              'uid': result.uid,
-                              'time_added': DateTime.now(),
-                              'email': _email,
-                            });
                             Navigator.pop(context);
                           }
                         }
