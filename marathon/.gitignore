@@ -1,6 +1,7 @@
 # pubspec
 ./marathon/pubspec.lock
 ./.idea
+./ios
 
 # Miscellaneous
 *.class
