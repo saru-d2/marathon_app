@@ -7,7 +7,6 @@ import 'package:marathon/shared/constants.dart';
 import 'package:marathon/screens/authenticate/signup_intro.dart';
 
 
-
 class Landing extends StatefulWidget {
   final Function toggleView;
   Landing({this.toggleView});
@@ -44,7 +43,7 @@ class _LandingState extends State<Landing> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(
-                            height: ScreenConstants.percentHeight * 60,
+                            height: ScreenConstants.percentHeight * 70,
                           ),
                           RaisedButton(
                               shape: RoundedRectangleBorder(
@@ -59,7 +58,7 @@ class _LandingState extends State<Landing> {
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 25,
+                                  fontSize: 20,
                                 ),
                               ),
                               onPressed: () {
@@ -76,9 +75,10 @@ class _LandingState extends State<Landing> {
                           ),
                           FlatButton(
                             child: Text(
-                              'Already a member? Log in',
+                              'Already a member? Login',
                               style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 15,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
