@@ -39,7 +39,7 @@ class _LandingState extends State<Landing> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(
-                            height: 20,
+                            height: ScreenConstants.percentHeight * 60,
                           ),
                           RaisedButton(
                               shape: RoundedRectangleBorder(
