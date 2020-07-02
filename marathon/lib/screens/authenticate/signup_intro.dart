@@ -4,19 +4,20 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:marathon/screens/authenticate/register.dart';
 import 'package:marathon/screens/authenticate/sign_in.dart';
 import 'package:marathon/screens/authenticate/landing.dart';
+import 'package:marathon/screens/authenticate/login.dart';
 import 'package:marathon/shared/constants.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/loading.dart';
 
-class SignupIntro extends StatefulWidget {
+class SignUpIntro extends StatefulWidget {
   final Function toggleView;
-  SignupIntro({this.toggleView});
+  SignUpIntro({this.toggleView});
 
   @override
-  _SignupIntroState createState() => _SignupIntroState();
+  _SignUpIntroState createState() => _SignUpIntroState();
 }
 
-class _SignupIntroState extends State<SignupIntro> {
+class _SignUpIntroState extends State<SignUpIntro> {
 
   //states
   String email = '';
@@ -89,12 +90,12 @@ class _SignupIntroState extends State<SignupIntro> {
 
                     // go to  page
                     FlatButton(
-                      child: Text('Already a member? Login!'),
+                      child: Text('Already a member? Login'),
                       onPressed: () {
                         print("register");
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return new Register();
+                          return new Login();
                         }));
                       },
                     )

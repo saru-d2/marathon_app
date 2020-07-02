@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:marathon/screens/authenticate/register.dart';
 import 'package:marathon/screens/authenticate/sign_in.dart';
 import 'package:marathon/screens/authenticate/landing.dart';
+import 'package:marathon/screens/authenticate/signup_intro.dart';
 import 'package:marathon/shared/constants.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/loading.dart';
@@ -140,7 +141,7 @@ class _LoginState extends State<Login> {
                         print("register");
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return new Register();
+                          return new SignUpIntro();
                         }));
                       },
                     )
