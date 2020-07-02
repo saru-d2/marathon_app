@@ -4,6 +4,8 @@ import 'package:marathon/shared/loading.dart';
 import 'package:marathon/screens/authenticate/register.dart';
 import 'package:marathon/screens/authenticate/login.dart';
 import 'package:marathon/shared/constants.dart';
+import 'package:marathon/screens/authenticate/signup_intro.dart';
+
 
 
 class Landing extends StatefulWidget {
@@ -65,7 +67,7 @@ class _LandingState extends State<Landing> {
                                   print("register");
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return new Register();
+                                    return new Signup_Intro();
                                   }));
                                 }
                               }),
