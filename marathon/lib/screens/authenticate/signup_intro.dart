@@ -8,15 +8,15 @@ import 'package:marathon/shared/constants.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/loading.dart';
 
-class Signup_Intro extends StatefulWidget {
+class SignupIntro extends StatefulWidget {
   final Function toggleView;
-  Signup_Intro({this.toggleView});
+  SignupIntro({this.toggleView});
 
   @override
-  _Signup_IntroState createState() => _Signup_IntroState();
+  _SignupIntroState createState() => _SignupIntroState();
 }
 
-class _Signup_IntroState extends State<Signup_Intro> {
+class _SignupIntroState extends State<SignupIntro> {
 
   //states
   String email = '';
@@ -72,7 +72,7 @@ class _Signup_IntroState extends State<Signup_Intro> {
                     RaisedButton(
                       color: Colors.pink[400],
                       child: Text(
-                        'Sign In',
+                        'Sign up with Email',
                         style: TextStyle(color: Colors.white),
                       ),
                       // button pressed
