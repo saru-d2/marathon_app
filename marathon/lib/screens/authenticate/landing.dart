@@ -66,7 +66,7 @@ class _LandingState extends State<Landing> {
                                   print("register");
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return new Signup_Intro();
+                                    return new SignupIntro();
                                   }));
                                 }
                               }),
