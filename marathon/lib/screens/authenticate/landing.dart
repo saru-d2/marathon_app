@@ -31,8 +31,8 @@ class _LandingState extends State<Landing> {
                 fit: BoxFit.cover,
               ),
             ),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 200, horizontal: 100),
+            child: Center(
+              // padding: EdgeInsets.symmetric(vertical: 200, horizontal: 100),
               child: Form(
                 key: _formKey,
                 child: Column(
