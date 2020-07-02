@@ -5,7 +5,6 @@ import 'package:marathon/shared/loading.dart';
 import 'package:marathon/screens/authenticate/register.dart';
 import 'package:marathon/screens/authenticate/sign_in.dart';
 
-
 class Landing extends StatefulWidget {
   final Function toggleView;
   Landing({this.toggleView});
@@ -25,22 +24,15 @@ class _LandingState extends State<Landing> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.brown[100],
-            appBar: AppBar(
-              backgroundColor: Colors.brown[400],
-              elevation: 0.0,
-              title: Text('Sign In'),
-              actions: <Widget>[
-                FlatButton.icon(
-                    onPressed: () {
-                      widget.toggleView();
-                    },
-                    icon: Icon(Icons.person),
-                    label: Text("Register"))
-              ],
-            ),
             body: Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("media/images/Landing_BackGrnd.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 200, horizontal: 100),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -49,38 +41,37 @@ class _LandingState extends State<Landing> {
                       height: 20,
                     ),
                     RaisedButton(
-                      color: Colors.pink[400],
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          print("register");
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return new Register();
-                          }));
-                        }
-                      }
-                    ),
+                        color: Colors.pink[400],
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            print("register");
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return new Register();
+                            }));
+                          }
+                        }),
                     SizedBox(
                       height: 20,
                     ),
                     FlatButton(
-	                    child: Text('Not a member? Sign up!'),
-	                    onPressed: () {
-	                      print("register");
-	                      Navigator.push(context,
-	                          MaterialPageRoute(builder: (context) {
-	                        return new SignIn();
-	                      }));
-	                    },
-	                  ),
+                      child: Text('Not a member? Sign up!'),
+                      onPressed: () {
+                        print("register");
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return new SignIn();
+                        }));
+                      },
+                    ),
                   ],
                 ),
               ),
             ),
-          );
+          ));
   }
 }
