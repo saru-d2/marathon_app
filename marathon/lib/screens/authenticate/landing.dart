@@ -1,9 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:marathon/services/auth.dart';
-// import 'package:marathon/shared/constants.dart';
 import 'package:marathon/shared/loading.dart';
 import 'package:marathon/screens/authenticate/register.dart';
-import 'package:marathon/screens/authenticate/sign_in.dart';
+import 'package:marathon/screens/authenticate/login.dart';
 
 class Landing extends StatefulWidget {
   final Function toggleView;
@@ -82,7 +81,7 @@ class _LandingState extends State<Landing> {
                               print("register");
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return new SignIn();
+                                return new Login();
                               }));
                             },
                           ),
