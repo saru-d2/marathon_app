@@ -3,6 +3,8 @@ import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/loading.dart';
 import 'package:marathon/screens/authenticate/register.dart';
 import 'package:marathon/screens/authenticate/login.dart';
+import 'package:marathon/shared/constants.dart';
+
 
 class Landing extends StatefulWidget {
   final Function toggleView;
@@ -20,6 +22,7 @@ class _LandingState extends State<Landing> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenConstants().init(context);
     return loading
         ? Loading()
         : Scaffold(
