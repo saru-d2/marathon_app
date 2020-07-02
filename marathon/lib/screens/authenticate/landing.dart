@@ -25,53 +25,71 @@ class _LandingState extends State<Landing> {
         ? Loading()
         : Scaffold(
             body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("media/images/Landing_BackGrnd.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Center(
-              // padding: EdgeInsets.symmetric(vertical: 200, horizontal: 100),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
-                    ),
-                    RaisedButton(
-                        color: Colors.pink[400],
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            print("register");
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return new Register();
-                            }));
-                          }
-                        }),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    FlatButton(
-                      child: Text('Not a member? Sign up!'),
-                      onPressed: () {
-                        print("register");
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return new SignIn();
-                        }));
-                      },
-                    ),
-                  ],
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("media/images/Landing_BackGrnd.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-            ),
-          ));
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 20,
+                          ),
+                          RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 120,
+                              ),
+                              color: Colors.yellow,
+                              child: Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                              ),
+                              onPressed: () {
+                                if (_formKey.currentState.validate()) {
+                                  print("register");
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return new Register();
+                                  }));
+                                }
+                              }),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          FlatButton(
+                            child: Text(
+                              'Already a member? Log in',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () {
+                              print("register");
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return new SignIn();
+                              }));
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )));
   }
 }
