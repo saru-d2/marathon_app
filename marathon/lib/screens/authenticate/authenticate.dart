@@ -3,6 +3,7 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:marathon/screens/authenticate/register.dart';
 import 'package:marathon/screens/authenticate/sign_in.dart';
+import 'package:marathon/screens/authenticate/landing.dart';
 import 'package:marathon/shared/constants.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/loading.dart';
@@ -68,6 +69,16 @@ class _AuthenticateState extends State<Authenticate> {
                       return new SignIn();
                     }));
                   }),
+                  FlatButton(
+                    child: Text('plz work bro'),
+                    onPressed: () {
+                      print("work naaaa");
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return new Landing();
+                      }));
+                    },
+                  ),
                   FlatButton(
                     child: Text('Not a member? Sign up!'),
                     onPressed: () {
