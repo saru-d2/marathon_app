@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "389903499981-kf2i3pll26s82r193shjq9osf1u1opnh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.netcon.marathon",
+            "certificate_hash": "1a2bb06de26376adfb0c02f98a56a4fe85b2cacf"
+          }
+        },
+        {
           "client_id": "389903499981-mtoj74nopua06ddqiejvnj8dsadbsva9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
