@@ -173,11 +173,11 @@ class _RegisterState extends State<Register> {
                           } else {
                             Navigator.pop(context);
                             uploadPic(result.uid);
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              print("in nav");
-                              return new selectCity();
-                            }));
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) {
+                            //   print("in nav");
+                            //   // return new selectCity();
+                            // }));
                           }
                         }
                       },

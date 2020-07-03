@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:marathon/screens/authenticate/selectCity.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/loading.dart';
 
@@ -7,6 +8,7 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
+
 
 class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
@@ -85,6 +87,10 @@ class _HomeState extends State<Home> {
               child: Text("select city"),
               onPressed: () {
                 print("city");
+                Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return new selectCity(dbUser.data["uid"].toString());
+                      }));
               },
               ),
               
