@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:marathon/screens/authenticate/register.dart';
 import 'package:marathon/screens/authenticate/sign_in.dart';
 import 'package:marathon/screens/authenticate/landing.dart';
+import 'package:marathon/screens/Forgot_Password.dart';
 import 'package:marathon/screens/authenticate/signup_intro.dart';
 import 'package:marathon/shared/constants.dart';
 import 'package:marathon/services/auth.dart';
@@ -18,7 +19,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   //states
   String email = '';
   String password = '';
@@ -39,16 +39,26 @@ class _LoginState extends State<Login> {
     return loading
         ? Loading
         : Scaffold(
-            backgroundColor: Colors.blue,
+            // backgroundColor: Colors.blue,
             body: Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-              child: Form(
-                key: _formKey,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("media/images/Login.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+            child: Form(
+              key: _formKey,
 
-                // UI stuff start here
+              // UI stuff start here
+              child: Center(
                 child: Column(
                   children: <Widget>[
-
+                    // spacing
+                    SizedBox(
+                      height: ScreenConstants.percentHeight * 35,
+                    ),
                     // spacing
                     SizedBox(
                       height: 20,
@@ -56,7 +66,15 @@ class _LoginState extends State<Login> {
 
                     // enter email textbox
                     TextFormField(
-                      decoration: InputDecoration(hintText: 'Email'),
+                      decoration: InputDecoration(
+                        hintText: "Email",
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: new BorderSide(color: Colors.white),
+                        ),
+                      ),
                       validator: (val) => val.isEmpty ? 'enter email' : null,
                       onChanged: (val) {
                         setState(() => email = val);
@@ -70,7 +88,15 @@ class _LoginState extends State<Login> {
 
                     // enter password textbox
                     TextFormField(
-                      decoration: InputDecoration(hintText: 'Password'),
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: new BorderSide(),
+                        ),
+                      ),
                       validator: (val) => val.length < 6
                           ? 'enter a password atleast 6 characters long'
                           : null,
@@ -87,10 +113,20 @@ class _LoginState extends State<Login> {
 
                     // email login button
                     RaisedButton(
-                      color: Colors.pink[400],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 15,
+                        horizontal: 120,
+                      ),
+                      color: Colors.yellow,
                       child: Text(
-                        'Sign In',
-                        style: TextStyle(color: Colors.white),
+                        'Login',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       // button pressed
                       onPressed: () async {
@@ -103,23 +139,28 @@ class _LoginState extends State<Login> {
                               error = 'please use valid credentials';
                               loading = false;
                             });
-                          }
-                          else {
+                          } else {
                             Navigator.pop(context);
                           }
                         }
                       },
                     ),
 
-
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Text(
-                      error,
-                      style: TextStyle(color: Colors.red, fontSize: 14.0),
+                      'or',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                      
+                    SizedBox(
+                      height: 10,
+                    ),
+
                     SignInButton(
                       Buttons.Google,
                       onPressed: () async {
@@ -128,15 +169,24 @@ class _LoginState extends State<Login> {
                         if (result == null) print("sign in failed lol");
                       },
                     ),
+
                     SignInButton(
                       Buttons.Facebook,
                       onPressed: () {
                         print("facebook");
                       },
                     ),
-                    Text('or'),
+
                     FlatButton(
-                      child: Text('Not a member? Sign up!'),
+                      child: Expanded(
+                        child: Text(
+                          'Dont have an account?Sign up',
+                          overflow: TextOverflow.clip,
+                          maxLines: 1,
+                          softWrap: false,
+                          style: TextStyle(color: Colors.white, fontSize: 14.0),
+                        ),
+                      ),
                       onPressed: () {
                         print("register");
                         Navigator.push(context,
@@ -144,13 +194,28 @@ class _LoginState extends State<Login> {
                           return new SignUpIntro();
                         }));
                       },
+                    ),
+
+                    FlatButton(
+                      child: Expanded(
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: Colors.white, fontSize: 14.0),
+                        ),
+                      ),
+                      onPressed: () {
+                        print("forgot pswrd");
+                        //  Add once forgot password page is made.
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) {
+                        //   return new SignUpIntro();
+                        // }));
+                      },
                     )
-
-
-
                   ],
                 ),
               ),
-            ));
+            ),
+          ));
   }
 }
