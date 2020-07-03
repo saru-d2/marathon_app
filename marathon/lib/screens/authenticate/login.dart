@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
                   children: <Widget>[
                     // spacing
                     SizedBox(
-                      height: ScreenConstants.percentHeight * 35,
+                      height: ScreenConstants.percentHeight * 25,
                     ),
                     // spacing
                     SizedBox(
@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
                         filled: true,
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(25.0),
+                          borderRadius: new BorderRadius.circular(10.0),
                           borderSide: new BorderSide(color: Colors.white),
                         ),
                       ),
@@ -93,7 +93,7 @@ class _LoginState extends State<Login> {
                         filled: true,
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(25.0),
+                          borderRadius: new BorderRadius.circular(10.0),
                           borderSide: new BorderSide(),
                         ),
                       ),
@@ -114,10 +114,10 @@ class _LoginState extends State<Login> {
                     // email login button
                     RaisedButton(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                          borderRadius: BorderRadius.circular(10)),
                       padding: EdgeInsets.symmetric(
                         vertical: 15,
-                        horizontal: 120,
+                        horizontal: 135,
                       ),
                       color: Colors.yellow,
                       child: Text(
@@ -180,7 +180,7 @@ class _LoginState extends State<Login> {
                     FlatButton(
                       child: Expanded(
                         child: Text(
-                          'Dont have an account?Sign up',
+                          'Dont have an account? Sign up',
                           overflow: TextOverflow.clip,
                           maxLines: 1,
                           softWrap: false,
@@ -205,11 +205,10 @@ class _LoginState extends State<Login> {
                       ),
                       onPressed: () {
                         print("forgot pswrd");
-                        //  Add once forgot password page is made.
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) {
-                        //   return new SignUpIntro();
-                        // }));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return new Forgot();
+                        }));
                       },
                     )
                   ],
