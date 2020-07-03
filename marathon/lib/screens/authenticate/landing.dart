@@ -6,7 +6,6 @@ import 'package:marathon/screens/authenticate/login.dart';
 import 'package:marathon/shared/constants.dart';
 import 'package:marathon/screens/authenticate/signup_intro.dart';
 
-
 class Landing extends StatefulWidget {
   final Function toggleView;
   Landing({this.toggleView});
@@ -47,7 +46,7 @@ class _LandingState extends State<Landing> {
                           ),
                           RaisedButton(
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
+                                  borderRadius: BorderRadius.circular(10)),
                               padding: EdgeInsets.symmetric(
                                 vertical: 15,
                                 horizontal: 120,

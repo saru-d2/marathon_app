@@ -18,7 +18,6 @@ class SignUpIntro extends StatefulWidget {
 }
 
 class _SignUpIntroState extends State<SignUpIntro> {
-
   //states
   String email = '';
   String password = '';
@@ -39,21 +38,26 @@ class _SignUpIntroState extends State<SignUpIntro> {
     return loading
         ? Loading
         : Scaffold(
-            backgroundColor: Colors.blue,
+            //backgroundColor: Colors.blue,
             body: Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-              child: Form(
-                key: _formKey,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("media/images/Login-2.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+            child: Form(
+              key: _formKey,
 
-                // UI stuff start here
+              // UI stuff start here
+              child: Center(
                 child: Column(
                   children: <Widget>[
-
                     // spacing
                     SizedBox(
-                      height: 20,
+                      height: ScreenConstants.percentHeight * 47,
                     ),
-
                     SignInButton(
                       Buttons.Google,
                       onPressed: () async {
@@ -68,13 +72,36 @@ class _SignUpIntroState extends State<SignUpIntro> {
                         print("facebook");
                       },
                     ),
-                    Text('or'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'or',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
 
                     RaisedButton(
-                      color: Colors.pink[400],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 15,
+                        horizontal: 60,
+                      ),
+                      color: Colors.yellow,
                       child: Text(
                         'Sign up with Email',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       // button pressed
                       onPressed: () {
@@ -83,14 +110,24 @@ class _SignUpIntroState extends State<SignUpIntro> {
                             MaterialPageRoute(builder: (context) {
                           return new Register();
                         }));
-                        
                       },
                     ),
 
-
                     // go to  page
                     FlatButton(
-                      child: Text('Already a member? Login'),
+                      child: Expanded(
+                        child: Text(
+                          'Already a member? Login',
+                          overflow: TextOverflow.clip,
+                          maxLines: 1,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                       onPressed: () {
                         print("register");
                         Navigator.push(context,
@@ -99,12 +136,10 @@ class _SignUpIntroState extends State<SignUpIntro> {
                         }));
                       },
                     )
-
-
-
                   ],
                 ),
               ),
-            ));
+            ),
+          ));
   }
 }
