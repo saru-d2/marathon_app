@@ -113,7 +113,7 @@ class _LoginState extends State<Login> {
                           borderRadius: BorderRadius.circular(10)),
                       padding: EdgeInsets.symmetric(
                         vertical: 20,
-                        horizontal: 120,
+                        horizontal: 20,
                       ),
                       color: Colors.yellow,
                       child: Text(
