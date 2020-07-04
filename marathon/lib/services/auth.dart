@@ -53,7 +53,7 @@ class AuthService {
           email: email, password: password);
       FirebaseUser user = result.user;
       _db.collection('users').document(user.uid).setData({
-        'displayname': name,
+        'displayName': name,
         'age': age,
         'uid': user.uid,
         'lastseen': DateTime.now(),

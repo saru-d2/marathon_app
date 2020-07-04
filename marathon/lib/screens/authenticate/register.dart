@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:marathon/screens/authenticate/selectCity.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/constants.dart';
 import 'package:marathon/shared/loading.dart';
@@ -131,25 +132,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 20,
                     ),
-                    DropdownButton<String>(
-                        value: _gender,
-                        // validator: (val) => val != 'select gender' ? 'select gender' : null,
-                        onChanged: (String newVal) {
-                          setState(() {
-                            _gender = newVal;
-                          });
-                        },
-                        items: <String>[
-                          'select gender',
-                          'male',
-                          'female',
-                          'other'
-                        ].map<DropdownMenuItem<String>>((String val) {
-                          return DropdownMenuItem<String>(
-                            value: val,
-                            child: Text(val),
-                          );
-                        }).toList()),
+                    
                     TextFormField(
                       decoration: InputDecoration(hintText: 'age'),
                       validator: (val) {
@@ -190,6 +173,11 @@ class _RegisterState extends State<Register> {
                           } else {
                             Navigator.pop(context);
                             uploadPic(result.uid);
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) {
+                            //   print("in nav");
+                            //   // return new selectCity();
+                            // }));
                           }
                         }
                       },
