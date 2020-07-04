@@ -57,11 +57,7 @@ class _LoginState extends State<Login> {
                   children: <Widget>[
                     // spacing
                     SizedBox(
-                      height: ScreenConstants.percentHeight * 25,
-                    ),
-                    // spacing
-                    SizedBox(
-                      height: 20,
+                      height: ScreenConstants.percentHeight * 40,
                     ),
 
                     // enter email textbox
@@ -83,7 +79,7 @@ class _LoginState extends State<Login> {
 
                     // spacing
                     SizedBox(
-                      height: 20,
+                      height: 5,
                     ),
 
                     // enter password textbox
@@ -108,7 +104,7 @@ class _LoginState extends State<Login> {
 
                     // spacing
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
 
                     // email login button
@@ -116,12 +112,13 @@ class _LoginState extends State<Login> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       padding: EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 135,
+                        vertical: 20,
+                        horizontal: 120,
                       ),
                       color: Colors.yellow,
                       child: Text(
                         'Login',
+                        maxLines: 1,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 15,
@@ -158,7 +155,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
 
                     SignInButton(
@@ -180,11 +177,11 @@ class _LoginState extends State<Login> {
                     FlatButton(
                       child: Expanded(
                         child: Text(
-                          'Dont have an account? Sign up',
+                          'Dont have an account? Signup',
                           overflow: TextOverflow.clip,
                           maxLines: 1,
                           softWrap: false,
-                          style: TextStyle(color: Colors.white, fontSize: 14.0),
+                          style: TextStyle(color: Colors.white, fontSize: 13.0),
                         ),
                       ),
                       onPressed: () {
@@ -200,7 +197,7 @@ class _LoginState extends State<Login> {
                       child: Expanded(
                         child: Text(
                           'Forgot Password?',
-                          style: TextStyle(color: Colors.white, fontSize: 14.0),
+                          style: TextStyle(color: Colors.white, fontSize: 13.0),
                         ),
                       ),
                       onPressed: () {
