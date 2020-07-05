@@ -203,7 +203,7 @@ class _RegisterState extends State<Register> {
                             });
                           },
                           items: <String>[
-                            'Select Gender',
+                            'select gender',
                             'male',
                             'female',
                             'other'
