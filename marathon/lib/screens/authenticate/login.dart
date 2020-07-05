@@ -40,6 +40,7 @@ class _LoginState extends State<Login> {
         ? Loading
         : Scaffold(
             body: Container(
+            	constraints: BoxConstraints.expand(),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("media/images/Login.png"),
@@ -52,7 +53,7 @@ class _LoginState extends State<Login> {
                     key: _formKey,
 
                     // UI stuff start here
-                    child: Center(
+                    // child: Center(
                       child: Column(
                         children: <Widget>[
                           // spacing
@@ -212,13 +213,9 @@ class _LoginState extends State<Login> {
                               }));
                             },
                           ),
-
-                          SizedBox(
-                            height: ScreenConstants.percentHeight * 11,
-                          )
                         ],
                       ),
-                    ),
+                    // ),
                   ),
                 )));
   }
