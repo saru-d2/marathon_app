@@ -64,6 +64,9 @@ class _SignUpIntroState extends State<SignUpIntro> {
                         print("google");
                         dynamic result = await _auth.signInWithGoogle();
                         if (result == null) print("sign in failed lol");
+                        else {
+                          Navigator.popUntil(context, ModalRoute.withName('/'));
+                        }
                       },
                     ),
                     SignInButton(

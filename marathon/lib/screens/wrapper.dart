@@ -9,9 +9,12 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
     //return either home or authen
+    
+    print(user);
     if (user == null) {
       return Landing();
     } else {
+      // Navigator.pop(context);
       return Home();
     }
   }
