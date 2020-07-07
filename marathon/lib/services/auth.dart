@@ -114,7 +114,7 @@ class AuthService {
       'photoUrl': user.photoUrl,
       'displayName': user.displayName,
       'lastSeen': DateTime.now(),
-    });
+    }, merge: true);
   }
 
   Future getUser() async {
