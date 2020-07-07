@@ -45,6 +45,8 @@ class _HomeState extends State<Home> {
     setState(() {
       dbUser = u;
     });
+    while(dbUser == null)
+      loading = true;
     loading = false;
   }
 
@@ -58,7 +60,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('title'),
         backgroundColor: Colors.brown[400],
-        elevation: 0.0,
+        elevation: 0.0, 
         actions: <Widget>[
           FlatButton.icon(
               onPressed: () async {
@@ -68,7 +70,7 @@ class _HomeState extends State<Home> {
               label: Text('logout')
               ),
               CircleAvatar(
-                backgroundImage: NetworkImage(pic),
+                backgroundImage: NetworkImage(dbUser.data["photoUrl"].toString()),
                 radius: 30,
               )
         ],
