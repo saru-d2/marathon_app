@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:marathon/services/auth.dart';
-import 'package:marathon/shared/constants.dart';
 import 'package:marathon/shared/loading.dart';
 
 class Register extends StatefulWidget {
@@ -16,7 +15,6 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   String _name = '';
-  String _gender = 'select gender';
   String _email = '';
   String _password = '';
   String _conPassword = '';
@@ -88,21 +86,28 @@ class _RegisterState extends State<Register> {
                       SizedBox(
                         height: 20,
                       ),
-                      RawMaterialButton(
-                        onPressed: () {
-                          print("profile button");
-                          getPic();
-                        },
-                        elevation: 2.0,
-
-                        // fillColor: Colors.white,
-                        child: Icon(
-                          Icons.person_outline,
-                          size: 35.0,
-                          color: Colors.white,
+                      Container(
+                        height: 100,
+                        
+                        child: RawMaterialButton(
+                          onPressed: () {
+                            print("profile button");
+                            getPic();
+                          },
+                          elevation: 2.0,
+                          
+                          // fillColor: Colors.white,
+                          
+                          child: (_profilePic == null) ? Icon(
+                            Icons.person_outline,
+                            size: 35.0,
+                            color: Colors.white,
+                          ) : 
+                          Image.file(_profilePic),
+                          
+                          padding: EdgeInsets.all(15.0),
+                          shape: CircleBorder(),
                         ),
-                        padding: EdgeInsets.all(15.0),
-                        shape: CircleBorder(),
                       ),
                       // spacing
                       SizedBox(
@@ -190,33 +195,33 @@ class _RegisterState extends State<Register> {
                       SizedBox(
                         height: 20,
                       ),
-                      DropdownButton<String>(
-                          value: _gender,
-                          style: TextStyle(
-                            color: Colors.black,
-                            backgroundColor: Colors.white,
-                          ),
-                          // validator: (val) => val != 'select gender' ? 'select gender' : null,
-                          onChanged: (String newVal) {
-                            setState(() {
-                              _gender = newVal;
-                            });
-                          },
-                          items: <String>[
-                            'select gender',
-                            'male',
-                            'female',
-                            'other'
-                          ].map<DropdownMenuItem<String>>((String val) {
-                            return DropdownMenuItem<String>(
-                              value: val,
-                              child: Text(val),
-                            );
-                          }).toList()),
-                      // spacing
-                      SizedBox(
-                        height: 10,
-                      ),
+                      // DropdownButton<String>(
+                      //     value: _gender,
+                      //     style: TextStyle(
+                      //       color: Colors.black,
+                      //       backgroundColor: Colors.white,
+                      //     ),
+                      //     // validator: (val) => val != 'select gender' ? 'select gender' : null,
+                      //     onChanged: (String newVal) {
+                      //       setState(() {
+                      //         _gender = newVal;
+                      //       });
+                      //     },
+                      //     items: <String>[
+                      //       'select gender',
+                      //       'male',
+                      //       'female',
+                      //       'other'
+                      //     ].map<DropdownMenuItem<String>>((String val) {
+                      //       return DropdownMenuItem<String>(
+                      //         value: val,
+                      //         child: Text(val),
+                      //       );
+                      //     }).toList()),
+                      // // spacing
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
                       TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Age',
@@ -277,7 +282,9 @@ class _RegisterState extends State<Register> {
                                 loading = false;
                               });
                             } else {
-                              Navigator.pop(context);
+                              // Navigator.pop(context);
+                              Navigator.popUntil(
+                                  context, ModalRoute.withName('/'));
                               uploadPic(result.uid);
                             }
                           }

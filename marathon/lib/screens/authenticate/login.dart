@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
         ? Loading
         : Scaffold(
             body: Container(
-            	constraints: BoxConstraints.expand(),
+                constraints: BoxConstraints.expand(),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("media/images/Login.png"),
@@ -54,167 +54,173 @@ class _LoginState extends State<Login> {
 
                     // UI stuff start here
                     // child: Center(
-                      child: Column(
-                        children: <Widget>[
-                          // spacing
-                          SizedBox(
-                            height: ScreenConstants.percentHeight * 40,
-                          ),
+                    child: Column(
+                      children: <Widget>[
+                        // spacing
+                        SizedBox(
+                          height: ScreenConstants.percentHeight * 40,
+                        ),
 
-                          // enter email textbox
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: "Email",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(10.0),
-                                borderSide: new BorderSide(color: Colors.white),
-                              ),
+                        // enter email textbox
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Email",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(10.0),
+                              borderSide: new BorderSide(color: Colors.white),
                             ),
-                            validator: (val) =>
-                                val.isEmpty ? 'enter email' : null,
-                            onChanged: (val) {
-                              setState(() => email = val);
-                            },
                           ),
+                          validator: (val) =>
+                              val.isEmpty ? 'enter email' : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
+                        ),
 
-                          // spacing
-                          SizedBox(
-                            height: 5,
-                          ),
+                        // spacing
+                        SizedBox(
+                          height: 5,
+                        ),
 
-                          // enter password textbox
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'Password',
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(10.0),
-                                borderSide: new BorderSide(),
-                              ),
+                        // enter password textbox
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(10.0),
+                              borderSide: new BorderSide(),
                             ),
-                            validator: (val) => val.length < 6
-                                ? 'enter a password atleast 6 characters long'
-                                : null,
-                            obscureText: true,
-                            onChanged: (val) {
-                              setState(() => password = val);
-                            },
                           ),
+                          validator: (val) => val.length < 6
+                              ? 'enter a password atleast 6 characters long'
+                              : null,
+                          obscureText: true,
+                          onChanged: (val) {
+                            setState(() => password = val);
+                          },
+                        ),
 
-                          // spacing
-                          SizedBox(
-                            height: 10,
-                          ),
+                        // spacing
+                        SizedBox(
+                          height: 10,
+                        ),
 
-                          // email login button
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 15,
-                              horizontal: 90,
-                            ),
-                            color: Colors.yellow,
-                            child: Text(
-                              'Login',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            // button pressed
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                setState(() => loading = true);
-                                dynamic result =
-                                    await _auth.signInWithEmailAndPassword(
-                                        email, password);
-                                if (result == null) {
-                                  setState(() {
-                                    error = 'please use valid credentials';
-                                    loading = false;
-                                  });
-                                } else {
-                                  Navigator.pop(context);
-                                }
-                              }
-                            },
+                        // email login button
+                        RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 90,
                           ),
-
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'or',
+                          color: Colors.yellow,
+                          child: Text(
+                            'Login',
+                            maxLines: 1,
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.0,
+                              color: Colors.black,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
+                          // button pressed
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              setState(() => loading = true);
+                              dynamic result = await _auth
+                                  .signInWithEmailAndPassword(email, password);
+                              if (result == null) {
+                                setState(() {
+                                  error = 'please use valid credentials';
+                                  loading = false;
+                                });
+                              } else {
+                                // Navigator.pop(context);
+                                Navigator.popUntil(
+                                    context, ModalRoute.withName('/'));
+                              }
+                            }
+                          },
+                        ),
 
-                          SignInButton(
-                            Buttons.Google,
-                            onPressed: () async {
-                              print("google");
-                              dynamic result = await _auth.signInWithGoogle();
-                              if (result == null) print("sign in failed lol");
-                            },
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'or',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
 
-                          SignInButton(
-                            Buttons.Facebook,
-                            onPressed: () {
-                              print("facebook");
-                            },
-                          ),
+                        SignInButton(
+                          Buttons.Google,
+                          onPressed: () async {
+                            print("google");
+                            dynamic result = await _auth.signInWithGoogle();
+                            if (result == null)
+                              print("sign in failed lol");
+                            else {
+                              Navigator.popUntil(
+                                  context, ModalRoute.withName('/'));
+                            }
+                          },
+                        ),
 
-                          FlatButton(
-                            child: Expanded(
-                              child: Text(
-                                'Dont have an account? Signup',
-                                overflow: TextOverflow.clip,
-                                maxLines: 1,
-                                softWrap: false,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 13.0),
-                              ),
+                        SignInButton(
+                          Buttons.Facebook,
+                          onPressed: () {
+                            print("facebook");
+                          },
+                        ),
+
+                        FlatButton(
+                          child: Expanded(
+                            child: Text(
+                              'Dont have an account? Signup',
+                              overflow: TextOverflow.clip,
+                              maxLines: 1,
+                              softWrap: false,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 13.0),
                             ),
-                            onPressed: () {
-                              print("register");
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return new SignUpIntro();
-                              }));
-                            },
                           ),
+                          onPressed: () {
+                            print("register");
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return new SignUpIntro();
+                            }));
+                          },
+                        ),
 
-                          FlatButton(
-                            child: Expanded(
-                              child: Text(
-                                'Forgot Password?',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 13.0),
-                              ),
+                        FlatButton(
+                          child: Expanded(
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 13.0),
                             ),
-                            onPressed: () {
-                              print("forgot pswrd");
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return new Forgot();
-                              }));
-                            },
                           ),
-                        ],
-                      ),
+                          onPressed: () {
+                            print("forgot pswrd");
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return new Forgot();
+                            }));
+                          },
+                        ),
+                      ],
+                    ),
                     // ),
                   ),
                 )));
