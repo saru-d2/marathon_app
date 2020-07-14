@@ -9,14 +9,13 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-
 class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
   @override
   var pic;
   var fbUser;
   var dbUser;
-  
+
   bool loading = true;
   void initState() {
     print("hi");
@@ -28,77 +27,88 @@ class _HomeState extends State<Home> {
   void getUserInfo() async {
     print("heyo");
     var u = await _auth.getUser();
-    setState((){
+    setState(() {
       // fbUser = await _auth.getUser();
       fbUser = u;
       print("fbUser: $fbUser");
     });
     getUserfromDb();
   }
+
   void getUserfromDb() async {
     print("hiii");
-    var u = await Firestore.instance.collection("users").document(fbUser.uid).get();
-    setState(()  {
+    var u =
+        await Firestore.instance.collection("users").document(fbUser.uid).get();
+    setState(() {
       pic = u.data["photoUrl"];
       print(pic);
     });
     setState(() {
       dbUser = u;
     });
-    while(dbUser == null)
-      loading = true;
+    while (dbUser == null) loading = true;
     loading = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return  loading
+    return loading
         ? Loading()
-        :
-      Scaffold(
-      backgroundColor: Colors.brown[50],
-      appBar: AppBar(
-        title: Text('title'),
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0, 
-        actions: <Widget>[
-          FlatButton.icon(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              icon: Icon(Icons.person),
-              label: Text('logout')
-              ),
-              CircleAvatar(
-                backgroundImage: NetworkImage(dbUser.data["photoUrl"].toString()),
-                radius: 30,
-              )
-        ],
-      ),
-      body: Container(
-        child: Column(
-          children: [
-            
-            Container(
-              child: Text(dbUser.data["city"].toString()),
+        : Scaffold(
+            backgroundColor: Colors.brown[50],
+            appBar: AppBar(
+              title: Text('title'),
+              backgroundColor: Colors.brown[400],
+              elevation: 0.0,
+              actions: <Widget>[
+                FlatButton.icon(
+                    onPressed: () async {
+                      await _auth.signOut();
+                    },
+                    icon: Icon(Icons.person),
+                    label: Text('logout')),
+                CircleAvatar(
+                  backgroundImage:
+                      NetworkImage(dbUser.data["photoUrl"].toString()),
+                  radius: 30,
+                )
+              ],
             ),
-            Container(
-              child: Text(dbUser.data["chapter"].toString()),
-            ),
-            RaisedButton(
-              child: Text("select city"),
-              onPressed: () {
-                print("city");
-                Navigator.push(context,
+            body: Container(
+              child: Column(
+                children: [
+                  Container(
+                    child: Text(dbUser.data["city"].toString()),
+                  ),
+                  Container(
+                    child: Text(dbUser.data["chapter"].toString()),
+                  ),
+                  RaisedButton(
+                    child: Text("select city"),
+                    onPressed: () {
+                      print("city");
+                      Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return new selectCity(dbUser.data["uid"].toString());
                       }));
-              },
+                    },
+                  ),
+                ],
               ),
-              
-          ],
-        ),
-      ),
-    );
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text("home"),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.explore),
+                  title: Text("explore"),
+                ),
+                // BottomNavigationBarItem(icon: null)
+              ]
+              ),
+          );
   }
 }
