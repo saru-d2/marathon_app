@@ -52,9 +52,9 @@ class _selectChapterState extends State<selectChapter> {
                                     documentSnapshot['chapterName'].toString(),
                                 'city': widget.info.cityName,
                               }, merge: true);
-
-                              Navigator.pop(context);
-                              
+                              setState(() {});
+                              Navigator.popUntil(
+                                  context, ModalRoute.withName('/'));
                             },
                           ),
                         ));

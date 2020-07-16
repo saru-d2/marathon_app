@@ -93,22 +93,59 @@ class _HomeState extends State<Home> {
                       }));
                     },
                   ),
+                  RaisedButton(
+                    color: Colors.amber,
+                    onPressed: () {
+                      setState(() {});
+                      getUserfromDb();
+                    },
+                  ),
+                  new EventList(),
                 ],
               ),
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  title: Text("home"),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.explore),
-                  title: Text("explore"),
-                ),
-                // BottomNavigationBarItem(icon: null)
-              ]
+            bottomNavigationBar:
+                BottomNavigationBar(items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text("home"),
               ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.explore),
+                title: Text("explore"),
+              ),
+              // BottomNavigationBarItem(icon: null)
+            ]),
           );
+  }
+}
+
+class EventList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Firestore.instance.collection('events').snapshots(),
+      builder: (context, snapshots) {
+        if (snapshots.hasData) {
+          return Container(
+            height: 200,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: snapshots.data.documents.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot documentSnapshot =
+                      snapshots.data.documents[index];
+                  return Container(
+                    width: 130,
+                    child: ListTile(
+                      title: Text(documentSnapshot['eventName']),
+                    ),
+                  );
+                }),
+          );
+        }
+      },
+    );
   }
 }
