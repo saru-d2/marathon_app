@@ -140,6 +140,7 @@ class EventList extends StatelessWidget {
                     width: 130,
                     child: ListTile(
                       title: Text(documentSnapshot['eventName']),
+                      onTap: () {print("heyy");},
                     ),
                   );
                 }),
