@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:marathon/screens/authenticate/selectCity.dart';
+import 'package:marathon/screens/home/displayEvent.dart';
 import 'package:marathon/services/auth.dart';
 import 'package:marathon/shared/loading.dart';
 
@@ -140,7 +141,11 @@ class EventList extends StatelessWidget {
                     width: 130,
                     child: ListTile(
                       title: Text(documentSnapshot['eventName']),
-                      onTap: () {print("heyy");},
+                      onTap: () {
+                        print("heyy");
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => displayEvents(eventID: documentSnapshot.documentID.toString(),)));
+                      },
                     ),
                   );
                 }),
