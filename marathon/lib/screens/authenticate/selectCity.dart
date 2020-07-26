@@ -48,7 +48,7 @@ class _selectCityState extends State<selectCity> {
                             onTap: () {
                               final data = Data(
                                 cityName:
-                                    documentSnapshot['cityName'].toString(),
+                                    documentSnapshot.documentID.toString(),
                                 docId: documentSnapshot.documentID.toString(),
                                 uid: widget.uid,
                               );

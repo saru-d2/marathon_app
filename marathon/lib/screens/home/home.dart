@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
                       getUserfromDb();
                     },
                   ),
-                  new EventList(),
+                  new EventList(dbUser),
                 ],
               ),
             ),
@@ -122,36 +122,47 @@ class _HomeState extends State<Home> {
 }
 
 class EventList extends StatelessWidget {
+  final dbUser;
+  @override
+  EventList(this.dbUser, {Key key}): super(key: key) ;
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: Firestore.instance.collection('events').snapshots(),
-      builder: (context, snapshots) {
-        if (snapshots.hasData) {
-          return Container(
-            height: 200,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: snapshots.data.documents.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot documentSnapshot =
-                      snapshots.data.documents[index];
-                  return Container(
-                    width: 130,
-                    child: ListTile(
-                      title: Text(documentSnapshot['eventName']),
-                      onTap: () {
-                        print("heyy");
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => displayEvents(eventID: documentSnapshot.documentID.toString(),)));
-                      },
-                    ),
-                  );
-                }),
-          );
-        }
-      },
+    return Column(
+      children: [
+        // RaisedButton(onPressed: () {
+        //   print(dbUser.data['city']);
+        // },) ,
+        StreamBuilder(
+          // stream: Firestore.instance.collection('cities').snapshots(),
+          stream: Firestore.instance.collection('cities').document(dbUser.data['city'].toString()).collection('events').snapshots(),
+          builder: (context, snapshots) {
+            if (snapshots.hasData) {
+              return Container(
+                height: 200,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: snapshots.data.documents.length,
+                    itemBuilder: (context, index) {
+                      DocumentSnapshot documentSnapshot =
+                          snapshots.data.documents[index];
+                      return Container(
+                        width: 130,
+                        child: ListTile(
+                          title: Text(documentSnapshot['eventName']),
+                          onTap: () {
+                            print("heyy");
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => displayEvents(eventID: documentSnapshot.documentID.toString(),)));
+                          },
+                        ),
+                      );
+                    }),
+              );
+            }
+          },
+        ),
+      ],
     );
   }
 }
