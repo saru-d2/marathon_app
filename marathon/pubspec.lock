@@ -353,7 +353,7 @@ packages:
     source: hosted
     version: "0.0.2"
   latlong:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: latlong
       url: "https://pub.dartlang.org"
