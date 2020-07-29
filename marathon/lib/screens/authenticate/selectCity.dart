@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:marathon/screens/authenticate/selectChapter.dart';
+import 'package:marathon/screens/authenticate/cityConfirmation.dart';
 
 class selectCity extends StatefulWidget {
   final String uid;
@@ -19,11 +20,26 @@ class Data {
 }
 
 class _selectCityState extends State<selectCity> {
+
+  
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("select city"),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Use Location Services"),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ConfirmationPage(widget.uid)));
+            },
+          ),
+        ],
       ),
       body: StreamBuilder(
           stream: Firestore.instance.collection("cities").snapshots(),
@@ -36,7 +52,7 @@ class _selectCityState extends State<selectCity> {
                     DocumentSnapshot documentSnapshot =
                         snapshots.data.documents[index];
                     return Card(
-                        key: Key(documentSnapshot["city"]),
+                        key: Key(documentSnapshot["cityId"]),
                         child: Card(
                           elevation: 4,
                           margin: EdgeInsets.all(8),
@@ -71,4 +87,6 @@ class _selectCityState extends State<selectCity> {
           }),
     );
   }
+
+  
 }

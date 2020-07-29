@@ -79,10 +79,10 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   Container(
-                    child: Text(dbUser.data["city"].toString()),
+                    child: Text(dbUser.data["cityName"].toString()),
                   ),
                   Container(
-                    child: Text(dbUser.data["chapter"].toString()),
+                    child: Text(dbUser.data["cityId"].toString()),
                   ),
                   RaisedButton(
                     child: Text("select city"),
