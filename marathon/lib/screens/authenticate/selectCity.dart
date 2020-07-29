@@ -36,7 +36,7 @@ class _selectCityState extends State<selectCity> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ConfirmationPage()));
+                  builder: (context) => ConfirmationPage(widget.uid)));
             },
           ),
         ],
@@ -52,7 +52,7 @@ class _selectCityState extends State<selectCity> {
                     DocumentSnapshot documentSnapshot =
                         snapshots.data.documents[index];
                     return Card(
-                        key: Key(documentSnapshot["city"]),
+                        key: Key(documentSnapshot["cityId"]),
                         child: Card(
                           elevation: 4,
                           margin: EdgeInsets.all(8),

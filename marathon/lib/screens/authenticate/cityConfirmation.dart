@@ -4,8 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:latlong/latlong.dart';
 
 class ConfirmationPage extends StatefulWidget {
-  ConfirmationPage();
+  final String uid;
   @override
+  ConfirmationPage(this.uid, {Key key}) : super(key: key);
   _ConfirmationPageState createState() => _ConfirmationPageState();
 }
 
@@ -60,7 +61,15 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                 RaisedButton(
                 child: Text("Confirm"),
                 onPressed: (){
-
+                  Firestore.instance
+                                  .collection("users")
+                                  .document(widget.uid)
+                                  .setData({
+                                'cityId':
+                                    _currentCityId,
+                                'cityName':
+                                    _currentCity,
+                              }, merge: true);
                 },
                 ),
                 RaisedButton(
